@@ -4,6 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+//#include "Interaction/EnemyInterface.h"
+//#include "UObject/WeakInterfacePtr.h"
+
 #include "AuraPlayerController.generated.h"
 
 class UInputMappingContext;
@@ -40,6 +43,10 @@ private:
 	void OnMove(const struct FInputActionValue& InputActionValue);
 
 	void CursorTrace();
-	TObjectPtr<IEnemyInterface> LastActor;
-	TObjectPtr<IEnemyInterface> ThisActor;
+	IEnemyInterface* LastActor;
+	IEnemyInterface* ThisActor;
+
+	//TObjectPtr<IEnemyInterface> LastActor;
+	//TObjectPtr<IEnemyInterface> ThisActor;
+	//TWeakInterfacePtr<IEnemyInterface> ThisActor;
 };
