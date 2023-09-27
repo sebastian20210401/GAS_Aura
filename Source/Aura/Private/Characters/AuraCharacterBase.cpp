@@ -3,6 +3,7 @@
 
 #include "Characters/AuraCharacterBase.h"
 #include "AbilitySystemComponent.h"
+#include "AbilitySystem/AuraAbilitySystemComponent.h"
 
 
 AAuraCharacterBase::AAuraCharacterBase()
@@ -12,8 +13,6 @@ AAuraCharacterBase::AAuraCharacterBase()
 	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
 	Weapon->SetupAttachment(GetMesh(), FName("WeaponHandSocket"));
 	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-
-
 }
 
 UAbilitySystemComponent* AAuraCharacterBase::GetAbilitySystemComponent() const
@@ -49,6 +48,7 @@ void AAuraCharacterBase::InitializeDefaultAttributes() const
 	ApplyEffectToSelf(DefaultVitalAttributes, 1.f);
 }
 
+
 //void AAuraCharacterBase::InitializePrimaryAttributes() const
 //{
 //	check(IsValid(GetAbilitySystemComponent()));
@@ -58,4 +58,10 @@ void AAuraCharacterBase::InitializeDefaultAttributes() const
 //	GetAbilitySystemComponent()->ApplyGameplayEffectSpecToTarget(*SpecHandle.Data.Get(), GetAbilitySystemComponent());
 //}
 
+void AAuraCharacterBase::AddCharacterAbilities()
+{
+	UAuraAbilitySystemComponent* AuraASC = CastChecked<UAuraAbilitySystemComponent>(AbilitySystemComponent);
+	if (!HasAuthority()) return;
 
+	AuraASC->AddCharacterAbilities(StartupAbilities);
+}

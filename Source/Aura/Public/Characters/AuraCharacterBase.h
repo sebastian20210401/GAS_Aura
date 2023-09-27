@@ -11,6 +11,7 @@
 class UAbilitySystemComponent;
 class UAttributeSet;
 class UGameplayEffect;
+class UGameplayAbility;
 
 
 UCLASS(Abstract)
@@ -49,7 +50,12 @@ protected:
 
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
-public:	
+
+	void AddCharacterAbilities();
+private:
+
+	UPROPERTY(EditAnywhere, Category = "Abilities")
+	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
 
 
 };
