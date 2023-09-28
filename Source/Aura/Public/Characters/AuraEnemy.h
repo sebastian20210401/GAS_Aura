@@ -35,9 +35,6 @@ public:
 
 	virtual void Die() override;
 
-	virtual FVector GetHitLocation() override;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	FVector HitLocation;
 
 	UPROPERTY(BlueprintAssignable)
 	FOnAttributeChangedSignature OnHealthChanged;

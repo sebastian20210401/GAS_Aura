@@ -50,10 +50,6 @@ void AAuraEnemy::Die()
 	Super::Die();
 }
 
-FVector AAuraEnemy::GetHitLocation()
-{
-	return HitLocation;
-}
 
 
 void AAuraEnemy::BeginPlay()

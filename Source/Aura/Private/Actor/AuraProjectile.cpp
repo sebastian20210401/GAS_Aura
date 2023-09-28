@@ -11,6 +11,7 @@
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Interaction/CombatInterface.h"
 
 
 AAuraProjectile::AAuraProjectile()
@@ -64,8 +65,14 @@ void AAuraProjectile::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, 
 	{
 		if (UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(OtherActor))
 		{
-			//TargetASC->GetAvatarActor();
-			UE_LOG(LogTemp, Error, TEXT("Changed Health on %s"), *TargetASC->GetAvatarActor()->GetName());
+			ICombatInterface* CombatInterface = Cast<ICombatInterface>(TargetASC->GetAvatarActor());
+			if (CombatInterface)
+			{
+				CombatInterface->SetHitLocation(GetActorLocation());
+				//UE_LOG(LogTemp, Warning, TEXT("Die"));
+			}
+			UE_LOG(LogTemp, Error, TEXT("Target on %s"), *TargetASC->GetAvatarActor()->GetName());
+			UE_LOG(LogTemp, Error, TEXT("Location is: %s"), *GetActorLocation().ToString());
 			TargetASC->ApplyGameplayEffectSpecToSelf(*DamageEffectSpecHandle.Data.Get());
 		}
 

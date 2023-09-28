@@ -33,6 +33,15 @@ public:
 	UFUNCTION(NetMulticast, Reliable)
 	virtual void MulticastHandleDeath();
 
+	
+	virtual void SetHitLocation(const FVector& Location) override;
+
+
+	virtual FVector GetHitLocation_Implementation() override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FVector HitLocation;
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void InitAbilityActorInfo();
@@ -57,6 +66,7 @@ protected:
 	FName WeaponTipSocketName;
 
 	virtual FVector GetCombatSocketLocation() override;
+
 
 	UPROPERTY()
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;

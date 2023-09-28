@@ -15,7 +15,8 @@ FVector ICombatInterface::GetCombatSocketLocation()
 	return FVector();
 }
 
-FVector ICombatInterface::GetHitLocation()
+void ICombatInterface::SetHitLocation(const FVector& Location)
 {
-	return FVector();
 }
+
+

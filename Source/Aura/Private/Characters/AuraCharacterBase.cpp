@@ -6,6 +6,7 @@
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Aura/Aura.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 
 AAuraCharacterBase::AAuraCharacterBase()
@@ -57,6 +58,18 @@ void AAuraCharacterBase::MulticastHandleDeath_Implementation()
 	Dissolve();
 }
 
+void AAuraCharacterBase::SetHitLocation(const FVector& Location)
+{
+	DrawDebugSphere(GetWorld(), Location, 15.f, 32, FColor::Red, false, 5.f);
+
+	HitLocation = Location;
+}
+
+FVector AAuraCharacterBase::GetHitLocation_Implementation()
+{
+	return HitLocation;
+}
+
 // Called when the game starts or when spawned
 void AAuraCharacterBase::BeginPlay()
 {
@@ -90,6 +103,7 @@ FVector AAuraCharacterBase::GetCombatSocketLocation()
 	check(Weapon);
 	return Weapon->GetSocketLocation(WeaponTipSocketName);
 }
+
 
 
 //void AAuraCharacterBase::InitializePrimaryAttributes() const
