@@ -64,6 +64,8 @@ void AAuraProjectile::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, 
 	{
 		if (UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(OtherActor))
 		{
+			//TargetASC->GetAvatarActor();
+			UE_LOG(LogTemp, Error, TEXT("Changed Health on %s"), *TargetASC->GetAvatarActor()->GetName());
 			TargetASC->ApplyGameplayEffectSpecToSelf(*DamageEffectSpecHandle.Data.Get());
 		}
 
