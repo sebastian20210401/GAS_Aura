@@ -8,6 +8,9 @@
 //#include "Interaction/EnemyInterface.h"
 #include "AuraPlayerController.generated.h"
 
+
+class UDamageTextComponent;
+
 class UDamageTextComponent;
 class IEnemyInterface;
 class UAuraInputConfig;
@@ -29,7 +32,6 @@ class AURA_API AAuraPlayerController : public APlayerController
 public:
 	AAuraPlayerController();
 	virtual void PlayerTick(float DeltaTime) override;
-
 
 	UFUNCTION(Client, Reliable)
 	void ShowDamageNumber(float DamageAmount, ACharacter* TargetCharacter);

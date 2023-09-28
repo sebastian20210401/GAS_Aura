@@ -33,15 +33,13 @@ public:
 	UFUNCTION(NetMulticast, Reliable)
 	virtual void MulticastHandleDeath();
 
-	
+	// ~ Hit Location Begin
 	virtual void SetHitLocation(const FVector& Location) override;
-
-
 	virtual FVector GetHitLocation_Implementation() override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FVector HitLocation;
-
+	// ~ Hit Location End
 protected:
 	virtual void BeginPlay() override;
 	virtual void InitAbilityActorInfo();
@@ -81,10 +79,7 @@ protected:
 	void Dissolve();
 
 	UFUNCTION(BlueprintImplementableEvent)
-	void StartDissolveTimeline(UMaterialInstanceDynamic* DynamicMaterialInstance);
-
-	UFUNCTION(BlueprintImplementableEvent)
-	void StartWeaponDissolveTimeline(UMaterialInstanceDynamic* DynamicMaterialInstance);
+	void StartDissolveTimeline(UMaterialInstanceDynamic* DynamicMaterialInstance, UMaterialInstanceDynamic* WeaponDynamicMaterialInstance);
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TObjectPtr<UMaterialInstance> DissolveMaterialInstance;

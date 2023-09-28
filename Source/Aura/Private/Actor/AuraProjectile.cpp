@@ -59,20 +59,20 @@ void AAuraProjectile::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, 
 {
 	UGameplayStatics::PlaySoundAtLocation(this, ImpactSound, GetActorLocation(), FRotator::ZeroRotator);
 	UNiagaraFunctionLibrary::SpawnSystemAtLocation(this, ImpactEffect, GetActorLocation());
-	LoopingSoundComponent->Stop();
+	if(LoopingSoundComponent) LoopingSoundComponent->Stop();
 
 	if (HasAuthority())
 	{
 		if (UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(OtherActor))
 		{
+			//~ Set Hit Location
 			ICombatInterface* CombatInterface = Cast<ICombatInterface>(TargetASC->GetAvatarActor());
 			if (CombatInterface)
 			{
 				CombatInterface->SetHitLocation(GetActorLocation());
-				//UE_LOG(LogTemp, Warning, TEXT("Die"));
 			}
-			UE_LOG(LogTemp, Error, TEXT("Target on %s"), *TargetASC->GetAvatarActor()->GetName());
-			UE_LOG(LogTemp, Error, TEXT("Location is: %s"), *GetActorLocation().ToString());
+			//~
+
 			TargetASC->ApplyGameplayEffectSpecToSelf(*DamageEffectSpecHandle.Data.Get());
 		}
 

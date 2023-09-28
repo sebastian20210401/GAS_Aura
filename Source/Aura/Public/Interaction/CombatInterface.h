@@ -35,11 +35,13 @@ public:
 	UAnimMontage* GetHitReactMontage();
 
 
-	
+	// ~ Hit Location
 	virtual void SetHitLocation(const FVector& Location);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	FVector GetHitLocation();
+	// ~ Hit Location
+
 
 	virtual void Die() = 0;
 
