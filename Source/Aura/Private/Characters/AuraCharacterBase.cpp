@@ -60,7 +60,7 @@ void AAuraCharacterBase::MulticastHandleDeath_Implementation()
 
 void AAuraCharacterBase::SetHitLocation(const FVector& Location)
 {
-	DrawDebugSphere(GetWorld(), Location, 15.f, 32, FColor::Red, false, 5.f);
+	//DrawDebugSphere(GetWorld(), Location, 15.f, 32, FColor::Red, false, 5.f);
 
 	HitLocation = Location;
 }

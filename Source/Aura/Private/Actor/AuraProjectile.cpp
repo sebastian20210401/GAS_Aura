@@ -13,6 +13,9 @@
 #include "Kismet/GameplayStatics.h"
 #include "Interaction/CombatInterface.h"
 
+#include "AbilitySystem/AuraAbilitySystemLibrary.h"
+
+
 
 AAuraProjectile::AAuraProjectile()
 {
@@ -65,6 +68,7 @@ void AAuraProjectile::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, 
 	{
 		if (UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(OtherActor))
 		{
+			// IMPORTANT
 			//~ Set Hit Location
 			ICombatInterface* CombatInterface = Cast<ICombatInterface>(TargetASC->GetAvatarActor());
 			if (CombatInterface)
@@ -72,6 +76,15 @@ void AAuraProjectile::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, 
 				CombatInterface->SetHitLocation(GetActorLocation());
 			}
 			//~
+
+			// IMPORTANT
+			//const FGameplayEffectContextHandle& EffectContext = DamageEffectSpecHandle.Data.Get()->GetEffectContext();
+			//UAuraAbilitySystemLibrary::SetIsCriticalHit(const_cast<FGameplayEffectContextHandle&>(EffectContext), true);
+
+			//const FGameplayEffectContextHandle& EffectContext = DamageEffectSpecHandle.Data.Get()->GetEffectContext();
+			//FVector_NetQuantize NetQuantizedVector = GetActorLocation(); // Convert it to FVector_NetQuantize
+			//const_cast<FVector_NetQuantize&>(EffectContext.GetHitResult()->Location) = NetQuantizedVector;
+			//UKismetSystemLibrary::DrawDebugSphere(GetWorld(), EffectContext.GetHitResult()->Location, 50.f, 12, FLinearColor::Blue, 1.0f, 1.0f);
 
 			TargetASC->ApplyGameplayEffectSpecToSelf(*DamageEffectSpecHandle.Data.Get());
 		}
