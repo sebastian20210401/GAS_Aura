@@ -24,3 +24,4 @@ void UAuraAssetManager::StartInitialLoading()
 	// This is required to use Target Data!
 	UAbilitySystemGlobals::Get().InitGlobalData();
 }
+
